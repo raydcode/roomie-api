@@ -1,7 +1,6 @@
 import { Users } from "../../../models";
 import { encode } from "../../utils/jwt";
 
-
 /**
  *  Create User and User Profile
  *  @param {Object} connection - knex Instance
@@ -44,10 +43,8 @@ export const createUser = ({
  *  @param {Object} connection - knex instance
  */
 const generateUserAuthToken = async ({ connection, user }) => {
-  const { id, full_name, email, mobile_no } = await user
-    .$query(connection)
-    .select("id", "full_name", "email", "mobile_no");
-  return encode({ id, full_name, email, mobile_no });
+  const { id } = await user.$query(connection).select("id");
+  return encode({ id });
 };
 
 /**

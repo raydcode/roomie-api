@@ -4,6 +4,8 @@ import morgan from "morgan";
 import cors from "cors";
 import OS from "os";
 import dotenv from "dotenv";
+import swaggerUI from "swagger-ui-express";
+import swaggerJson from "./swagger-output.json";
 
 // Environment variables Configuration:
 dotenv.config({ path: ".env" });
@@ -51,6 +53,8 @@ if (process.env.NODE_ENV !== "production") {
       free_memory: `${(OS.freemem() / 1e9).toFixed(2)} GB`,
     });
   });
+
+  app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerJson));
 }
 
 // Server Messages:

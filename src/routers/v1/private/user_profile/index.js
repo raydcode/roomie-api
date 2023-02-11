@@ -2,10 +2,14 @@ import { Router } from "express";
 import { validationResult } from "express-validator";
 import { getInfo } from "../../../../controllers/user_profiles";
 
-
 const routes = Router();
 
 routes.post("/", async (req, res) => {
+  /**
+   * #swagger.tags = ['User Profiles']
+   * #swagger.path = '/user_profile'
+   */
+
   try {
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -19,6 +23,5 @@ routes.post("/", async (req, res) => {
     res.status(error.statusCode).send(error);
   }
 });
-
 
 module.exports = routes;

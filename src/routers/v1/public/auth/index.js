@@ -10,6 +10,11 @@ import { signUpSchema, verifyUserSchema } from "./schema";
 const routes = Router();
 
 routes.post("/signup", signUpSchema, async (req, res) => {
+  /**
+   * #swagger.tags = ['Auth']
+   * #swagger.path = '/auth/signup'
+   */
+
   try {
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -25,6 +30,11 @@ routes.post("/signup", signUpSchema, async (req, res) => {
 });
 
 routes.post("/login", verifyUserSchema, async (req, res) => {
+  /**
+   * #swagger.tags = ['Auth']
+   * #swagger.path = '/auth/login'
+   */
+
   try {
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -40,6 +50,10 @@ routes.post("/login", verifyUserSchema, async (req, res) => {
 });
 
 routes.post("/reset-password", verifyUserSchema, async (req, res) => {
+  /**
+   * #swagger.tags = ['Auth']
+   * #swagger.path = '/auth/reset-password'
+   */
   try {
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
