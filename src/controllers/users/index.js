@@ -4,14 +4,14 @@ import { encode } from "../../utils/jwt";
 /**
  *  Create User and User Profile
  *  @param {Object} connection - knex Instance
- *  @param {String} full_name - full name of the user
+ *  @param {String} user_name -  name of the user
  *  @param {String} email - email of the user
  *  @param {String} password - password of the user
  *  @param {String} mobile_no 	- mobile number
  */
 export const createUser = ({
   connection,
-  full_name,
+  user_name,
   password,
   email,
   mobile_no,
@@ -19,12 +19,12 @@ export const createUser = ({
   return new Promise(async (resolve, reject) => {
     try {
       await Users.query(connection).insertGraph({
-        full_name,
+        user_name,
         password,
         email,
         mobile_no,
         user_profile: {
-          full_name,
+          full_name: user_name,
           email,
           mobile_no,
         },

@@ -9,7 +9,7 @@ class UserProfiles extends Model {
   static get relationMappings() {
     return {
       user: {
-        relation: Model.HasManyRelation,
+        relation: Model.BelongsToOneRelation,
         modelClass: __dirname + "/users",
         join: {
           from: "user_profiles.user_id",

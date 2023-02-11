@@ -1,21 +1,21 @@
-# Express Boilerplate with Objection ORM wrapped with Postgraphile (Graphql)
-
+# Express Boilerplate with Objection ORM
 
 Start Server
-```bash 
-npm start 
+
+```bash
+npm start
 ```
 
-For Development  uses nodemon
+For Development uses nodemon
 
-```bash 
+```bash
 npm run dev
 
 ```
 
 Debugging
 
-```bash 
+```bash
 npm run debug
 
 ```
@@ -24,15 +24,16 @@ npm run debug
 
 Here We Using knex.js for database connection configuration and migration
 
-  # migration
+# migration
 
 To run migrations
+
 ```bash
 npx knex migrate:latest  --knexfile ./db/knexfile.js
 
 ```
 
-To make  migration
+To make migration
 
 ```bash
 npx knex migrate:make 'table_name'  --knexfile ./db/knexfile.js
@@ -43,6 +44,5 @@ npx knex migrate:make 'table_name'  --knexfile ./db/knexfile.js
 https://knexjs.org <br />
 https://vincit.github.io/objection.js <br />
 https://www.graphile.org/postgraphile
-
 
 Happy Coding ✨ !
