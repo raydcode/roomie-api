@@ -9,7 +9,7 @@
     "dev": "nodemon -r dotenv/config --exec node_modules/.bin/babel-node server.js",
     "debug": "node_modules/.bin/babel-node -r dotenv/config server.js  --inspect",
     "clean": "rm -rf dist",
-    "build": "npm run clean && babel src --out-dir dist",
+    "build": "npm run clean && babel src --out-dir dist/api",
     "prepare": "husky install"
   },
   "repository": {
