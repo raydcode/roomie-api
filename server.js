@@ -4,10 +4,9 @@ import morgan from "morgan";
 import cors from "cors";
 import OS from "os";
 import dotenv from "dotenv";
-import graphQL from "./graphql";
 
 // Environment variables Configuration:
-dotenv.config();
+dotenv.config({ path: ".env" });
 
 // Thread Pool Configuration
 process.env.UV_THREADPOOL_SIZE = OS.cpus().length;
@@ -23,9 +22,6 @@ app.use(express.json());
 app.use("/api/v1", RoutesV1);
 
 // GraphQL Configuration
-
-// app.use("/graphql", isAuthenticated);
-app.use(graphQL);
 
 // Logger for Request Error messages
 app.use(

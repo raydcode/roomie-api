@@ -1,3 +1,4 @@
+require("dotenv").config({ path: "../.env" });
 const { DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_NAME } = process.env;
 
 const defaults = {
@@ -10,8 +11,6 @@ const defaults = {
     password: DB_PASSWORD,
   },
 };
-
-
 
 module.exports = {
   staging: {
