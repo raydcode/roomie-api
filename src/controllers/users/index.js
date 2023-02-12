@@ -30,7 +30,7 @@ export const createUser = ({
         },
       });
 
-      resolve("User SignUp Process  100% Done !");
+      resolve(`Welcome to Roomie : ${user_name}`);
     } catch (error) {
       reject(error);
     }
@@ -61,14 +61,17 @@ const updateUser = async ({ user, connection, update_fields }) =>
 /**
  *  Verify that the user is valid
  *  @param {Object} connection - knex instance
- *  @param {String} email - email of the user
+ *  @param {String} user_name - email of the user
  *  @param {String} password - password of the user
  */
 
-export const verifyUser = ({ connection, email, password }) => {
+export const verifyUser = ({ connection, user_name, password }) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const user = await Users.query(connection).first().where({ email });
+      const user = await Users.query(connection).first().where({ user_name });
+
+      if (!user)
+        return reject({ error: "Invalid Credentials", statusCode: 401 });
 
       const is_verified = await user.verifyPassword(password);
       if (!is_verified)
@@ -79,12 +82,13 @@ export const verifyUser = ({ connection, email, password }) => {
         token: await generateUserAuthToken({ connection, user }),
       });
 
-      updateUser({
+      await updateUser({
         user,
         connection,
         update_fields: { last_logged_in: new Date() },
       });
     } catch (error) {
+      console.log(error);
       reject(error);
     }
   });

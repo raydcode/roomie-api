@@ -5,7 +5,7 @@ const Password = require("objection-password")({
   allowEmptyPassword: true,
 });
 const Unique = require("objection-unique")({
-  fields: ["email", "full_name"],
+  fields: ["email", "user_name"],
   identifiers: ["id"],
 });
 
@@ -16,28 +16,6 @@ class Users extends Mixins(Model) {
 
   static get tableName() {
     return "private.users";
-  }
-  static get jsonSchema() {
-    return {
-      type: "object",
-      properties: {
-        // Properties defined as objects or arrays are
-        // automatically converted to JSON strings when
-        // writing to database and back to objects and arrays
-        // when reading from database. To override this
-        // behaviour, you can override the
-        // Model.jsonAttributes property.
-        address: {
-          type: "object",
-          properties: {
-            street: { type: "string" },
-            city: { type: "string" },
-            state: { type: "string" },
-            pinCode: { type: "string" },
-          },
-        },
-      },
-    };
   }
   static get relationMappings() {
     return {
