@@ -104,6 +104,37 @@
           }
         }
       }
+    },
+    "/auth/forgetpassword": {
+      "post": {
+        "tags": ["Auth"],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "required": ["email"]
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
