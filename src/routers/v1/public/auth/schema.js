@@ -38,3 +38,12 @@ export const verifyUserSchema = [
     .withMessage("password field must NOT be empty")
     .trim(),
 ];
+
+export const forgetPasswordSchema = [
+  body("email")
+    .isEmail()
+    .not()
+    .isEmpty()
+    .withMessage("user_name field must NOT be empty")
+    .trim(),
+];

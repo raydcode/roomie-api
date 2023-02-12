@@ -1,5 +1,6 @@
 import { Users } from "../../../models";
 import { encode } from "../../utils/jwt";
+import { sendEmail } from "../../utils/mail";
 
 /**
  *  Create User and User Profile
@@ -30,7 +31,15 @@ export const createUser = ({
         },
       });
 
-      resolve(`Welcome to Roomie : ${user_name}`);
+      const message = `Welcome to Roomie : ${user_name}`;
+
+      resolve(message);
+
+      await sendEmail({
+        email: email,
+        subject: message,
+        message: `Hi ${user_name} , We very happy to welcome you to Roomie THE EXPENSE TRACKER APPLICATION ...`,
+      });
     } catch (error) {
       reject(error);
     }
@@ -42,9 +51,9 @@ export const createUser = ({
  *  @param {Object} user - Identified User Model Object
  *  @param {Object} connection - knex instance
  */
-const generateUserAuthToken = async ({ connection, user }) => {
+const generateUserAuthToken = async ({ connection, user, expiry_time }) => {
   const { id } = await user.$query(connection).select("id");
-  return encode({ id });
+  return encode({ id }, expiry_time);
 };
 
 /**
@@ -87,6 +96,35 @@ export const verifyUser = ({ connection, user_name, password }) => {
         connection,
         update_fields: { last_logged_in: new Date() },
       });
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
+  });
+};
+
+/**
+ *  Forget User Password
+ *  @param {Object} connection - knex instance
+ *  @param {String} email - email of the user
+ */
+export const forgetPassword = ({ connection, email }) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const user = await Users.query(connection).first().where({ email });
+
+      const token = await generateUserAuthToken({
+        connection,
+        user,
+        expiry_time: "1h",
+      });
+
+      await sendEmail({
+        email: email,
+        subject: `Reset Password Link`,
+        message: `Hi ${user.user_name} , reset password link : https://roomie.dev.raydcode.in/resetpassword?token=${token}`,
+      });
+      resolve();
     } catch (error) {
       console.log(error);
       reject(error);
