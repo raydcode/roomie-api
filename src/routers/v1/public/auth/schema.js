@@ -2,7 +2,7 @@
 import { body } from "express-validator";
 
 export const signUpSchema = [
-  body("full_name")
+  body("user_name")
     .not()
     .isEmpty()
     .withMessage("username field must NOT be empty")
@@ -27,14 +27,12 @@ export const signUpSchema = [
 ];
 
 export const verifyUserSchema = [
-  body("email")
-    .isEmail()
+  body("user_name")
     .not()
     .isEmpty()
-    .withMessage("email field must NOT be empty")
+    .withMessage("user_name field must NOT be empty")
     .trim(),
   body("password")
-    .isLength({ min: 5, max: 20 })
     .not()
     .isEmpty()
     .withMessage("password field must NOT be empty")

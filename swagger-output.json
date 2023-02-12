@@ -43,6 +43,31 @@
           "400": {
             "description": "Bad Request"
           }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_name": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "mobile_no": {
+                    "type": "string"
+                  }
+                },
+                "required": ["user_name", "password", "email", "mobile_no"]
+              }
+            }
+          }
         }
       }
     },
@@ -58,20 +83,24 @@
           "400": {
             "description": "Bad Request"
           }
-        }
-      }
-    },
-    "/auth/reset-password": {
-      "post": {
-        "tags": ["Auth"],
-        "description": "",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_name": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                },
+                "required": ["user_name", "password"]
+              }
+            }
           }
         }
       }
