@@ -51,7 +51,7 @@ routes.post("/signup", signUpSchema, async (req, res) => {
     let response = await createUser(req.body);
     res.status(201).send({ type: "success", response });
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
     res.status(error.statusCode).send(error);
   }
 });

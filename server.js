@@ -65,3 +65,5 @@ app.listen(
     `🚀 Server listening on port ${PORT} in Environment Mode on "${process.env.NODE_ENV}"`
   )
 );
+
+export default app;
